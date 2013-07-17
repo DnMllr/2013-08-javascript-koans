@@ -32,16 +32,24 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(productsICanEat.length).toBe(FILL_ME_IN);
+    expect(productsICanEat.length).toBe(1);
   });
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
 
       var productsICanEat = [];
 
-      /* solve using filter() & all() / any() */
+      var mushrooms = function(x) { return x !== "mushrooms"}
 
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+      for (var i = 0 ; i < products.length ; i += 1) {
+        if (products[i].containsNuts === false) {
+          if (_(products[i].ingredients).all(mushrooms)) {
+            productsICanEat.push(products[i]);
+          }
+        }
+      }
+
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
@@ -55,14 +63,16 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
     
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+    var sum = _.chain(_.range(1, 1000))
+      .reduce(function (memo, x) {if (x % 3 === 0 || x % 5 === 0) {return memo + x}}, 0)    /* try chaining range() and reduce() */
+      .value();
 
-    expect(233168).toBe(FILL_ME_IN);
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
